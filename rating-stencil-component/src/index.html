@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
+  <title>Stencil Component Starter</title>
+  <style>
+    slider-element {
+      width: 300px;
+      margin-right: 10px;
+    }
+  </style>
+  <script src="/build/rating.js"></script>
+  <script>
+    var red = 0, green = 0, blue = 0;
+    function changeBackgroundColor(red, green, blue) {
+      document.getElementById("colorDiv").style.backgroundColor = "rgb(" + red + ", " + green + ", " + blue + ")";
+    }
+    setTimeout(() => {
+      document.getElementById("red").addEventListener("onValueUpdated", (event) => {
+        red = event.detail.value;
+        changeBackgroundColor(red, green, blue);
+      });
+      document.getElementById("green").addEventListener("onValueUpdated", (event) => {
+        green = event.detail.value
+        changeBackgroundColor(red, green, blue);
+      });
+      document.getElementById("blue").addEventListener("onValueUpdated", (event) => {
+        blue = event.detail.value;
+        changeBackgroundColor(red, green, blue);
+      });
+    }, 100)
+
+  </script>
+
+</head>
+<body>
+
+  <star-rating value=3 max-value=10></star-rating>
+  <div style="display: flex; width: 100%">
+    <slider-element id= "red" max-value=255 tick-size=50></slider-element>
+    <slider-element id= "green" max-value=255 tick-size=50></slider-element>
+    <slider-element id="blue" max-value=255 tick-size=50></slider-element>
+  </div>
+  <div style="width: 200px; height: 200px" id="colorDiv"></div>
+
+</body>
+</html>
