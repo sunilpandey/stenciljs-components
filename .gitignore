@@ -1,2 +1,10 @@
 
 package-lock\.json
+
+\.stencil/
+
+dist/
+node_modules/
+www/
+src/components/*/readme.md
+src/components.d.ts
