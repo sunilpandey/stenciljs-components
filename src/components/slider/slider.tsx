@@ -57,11 +57,13 @@ export class Slider {
             if(value < 0) {
                 value = 0;
             }
-            let width = parseInt(window.getComputedStyle(this.mainContainer).width, 10)
-            if((value + 5) > width) {
-                value = width - 5;
+            let width = parseInt(window.getComputedStyle(this.mainContainer).width, 10);
+            let dragger = this.sliderElement.querySelector('.dragger');
+            let draggerWidth = parseInt(window.getComputedStyle(dragger).width, 10);
+            if((value + draggerWidth) > width) {
+                value = width - draggerWidth;
             }
-            this.onValueUpdated.emit({value: (this.maxValue/width) * value})
+            this.onValueUpdated.emit({value: (this.maxValue/(width - draggerWidth)) * value})
             this.left = value + "px";
         }
     }
