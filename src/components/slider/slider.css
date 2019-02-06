@@ -1,0 +1,8 @@
+.main-container {
+    display: flex;
+}
+
+.button-container {
+    display: flex;
+    align-self: flex-end;
+}
