@@ -65,16 +65,38 @@ export class Slider {
         }
     }
 
+    private containerWidth() {
+        let width = parseInt(window.getComputedStyle(this.mainContainer).width, 10);
+        return width;
+    }
     private setDraggerPosition(value) {
         if(value < 0) {
             value = 0;
         }
-        let width = parseInt(window.getComputedStyle(this.mainContainer).width, 10);
+        var width = this.containerWidth();
         if((value + this.draggerWidth) > width) {
             value = width - this.draggerWidth;
         }
         this.onValueUpdated.emit({value: (this.maxValue/(width - this.draggerWidth)) * value})
         this.left = value + "px";
+    }
+
+    private getNextDraggerPosition() : number{
+        for(var i = 0; i < this.allTickPoints.length; i++) {
+            if((parseInt(this.left, 10) + 1) <= this.allTickPoints[i]) {
+                return this.allTickPoints[i];
+            }
+        }
+        return this.containerWidth();
+    }
+
+    private getPreviousDraggerPosition(): number {
+        for(var i = this.allTickPoints.length - 1; i >=0; i--) {
+            if((parseInt(this.left, 10) - 1) >= this.allTickPoints[i]) {
+                return this.allTickPoints[i];
+            }
+        }
+        return 0;
     }
     private createTicks() {
         var ticks = [];
@@ -87,10 +109,23 @@ export class Slider {
     private onKeyPress = (event: KeyboardEvent) => {
         switch(event.keyCode) {
             case this.Left_Arrow:
-                this.setDraggerPosition(parseInt(this.left, 10) - 1);
+                if(event.ctrlKey || event.metaKey) {
+                    this.setDraggerPosition(0);
+                }else if(event.altKey){
+                    this.setDraggerPosition(this.getPreviousDraggerPosition());
+                }
+                else {
+                    this.setDraggerPosition(parseInt(this.left, 10) - 1);
+                }
                 break;
             case this.Right_Arrow:
-                this.setDraggerPosition(parseInt(this.left, 10) + 1);
+                if(event.ctrlKey || event.metaKey) {
+                    this.setDraggerPosition(this.containerWidth());
+                }else if(event.altKey){
+                    this.setDraggerPosition(this.getNextDraggerPosition());
+                }else {
+                    this.setDraggerPosition(parseInt(this.left, 10) + 1);
+                }
                 break;
 
         }
