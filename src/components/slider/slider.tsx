@@ -101,7 +101,7 @@ export class Slider {
     private createTicks() {
         var ticks = [];
         for(let i = 0; i < this.allTickPoints.length; i++) {
-            ticks.push(<div style={{ width: "1px", height: "100%", "background-color": "blue", position: "absolute", left: this.allTickPoints[i] + "px" }}></div>)
+            ticks.push(<div class="ticks" style={{ left: this.allTickPoints[i] + "px" }}></div>)
         }
         return ticks;
     }
@@ -133,10 +133,10 @@ export class Slider {
 
     render() {
         return (
-            <div class="main-container" style={{ height: "40px", display: "flex", flex: "1 1 auto", "background-color": "gray", "align-items": "center", position: "relative" }}>
+            <div class="main-container">
                 {this.createTicks()}
-                <div style={{ "background-color": "darkgray", width: "100%", height: "10px" }}></div>
-                <div class="dragger" style={{ width: "5px", "background-color": "brown", height: "100%", position: "absolute", left: this.left }} onMouseDown={this.mouseDownTrigger.bind(this)}></div>
+                <div class="track"></div>
+                <div class="dragger" style={{ left: this.left }} onMouseDown={this.mouseDownTrigger.bind(this)}></div>
             </div>
 
         )
