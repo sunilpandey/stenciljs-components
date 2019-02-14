@@ -1,7 +1,7 @@
 import { Component, State, Element, Prop, EventEmitter, Event } from '@stencil/core'
 @Component({
     tag: "slider-element",
-    styleUrl: "slider.css",
+    styleUrl: "slider.less",
 })
 
 export class Slider {

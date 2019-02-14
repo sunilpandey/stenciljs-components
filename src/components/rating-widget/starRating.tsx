@@ -2,7 +2,7 @@ import { Component, Prop, State, Event, EventEmitter } from '@stencil/core'
 
 @Component ({
     tag: 'star-rating',
-    styleUrl: 'starRating.css',
+    styleUrl: 'starRating.less',
     shadow: true
 })
 
