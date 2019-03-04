@@ -98,6 +98,11 @@ export class Slider {
         }
         return 0;
     }
+
+    private mouseClickedOnTrack($event: MouseEvent): void {
+        let value = ($event.clientX - this.getElementOffset(this.mainContainer))
+        this.setDraggerPosition(value);
+    }
     private createTicks() {
         var ticks = [];
         for(let i = 0; i < this.allTickPoints.length; i++) {
@@ -135,7 +140,7 @@ export class Slider {
         return (
             <div class="main-container">
                 {this.createTicks()}
-                <div class="track"></div>
+                <div class="track" onClick={this.mouseClickedOnTrack.bind(this)}></div>
                 <div class="dragger" style={{ left: this.left }} onMouseDown={this.mouseDownTrigger.bind(this)}></div>
             </div>
 
