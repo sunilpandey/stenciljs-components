@@ -39,9 +39,11 @@ export class Slider {
         this.draggerWidth = parseInt(window.getComputedStyle(dragger).width, 10) + 2;
         var width = parseInt(window.getComputedStyle(this.mainContainer).width, 10);
         this.allTickPoints = [];
-        var tickValue = this.maxValue/this.tickSize;
-        for(let i = 1; i < (this.maxValue/this.tickSize); i++) {
-            this.allTickPoints.push((width / tickValue) * i )
+        let tickCount = parseInt(this.maxValue/this.tickSize);
+        let maxPercentage = ((width-this.draggerWidth)/width) * 100;
+        let tickPosition = maxPercentage / tickCount;
+        for(let i = 1; i <= tickCount; i++) {
+            this.allTickPoints.push(tickPosition * i )
         }
     }
 
@@ -106,7 +108,7 @@ export class Slider {
     private createTicks() {
         var ticks = [];
         for(let i = 0; i < this.allTickPoints.length; i++) {
-            ticks.push(<div class="ticks" style={{ left: this.allTickPoints[i] + "px" }}></div>)
+            ticks.push(<div class="ticks" style={{ left: this.allTickPoints[i] + "%" }}></div>)
         }
         return ticks;
     }
