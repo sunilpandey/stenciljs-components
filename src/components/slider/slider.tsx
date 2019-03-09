@@ -36,7 +36,7 @@ export class Slider {
             this.onKeyPress(event);
         })
         let dragger = this.sliderElement.querySelector('.dragger');
-        this.draggerWidth = parseInt(window.getComputedStyle(dragger).width, 10);
+        this.draggerWidth = parseInt(window.getComputedStyle(dragger).width, 10) + 2;
         var width = parseInt(window.getComputedStyle(this.mainContainer).width, 10);
         this.allTickPoints = [];
         var tickValue = this.maxValue/this.tickSize;
